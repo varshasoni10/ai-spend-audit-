@@ -65,13 +65,15 @@ app.post('/api/lead', async (req, res) => {
       console.log('Email sent successfully to', email);
     } else {
       console.log('EMAIL_USER and EMAIL_PASS not set. Skipping actual email sending.');
-      console.log('Message that would have been sent:');
-      console.log(mailOptions.html);
     }
     res.json({ success: true, reportId: mockReportId });
   } catch (error) {
     console.error('Error sending email:', error);
-    res.status(500).json({ success: false, error: 'Failed to send email' });
+    if (error.response && error.response.includes('Application-specific password required')) {
+        res.status(500).json({ success: false, error: 'Gmail blocked the sign-in. You MUST use a 16-digit App Password instead of your regular Gmail password.' });
+    } else {
+        res.status(500).json({ success: false, error: 'Failed to send email. Check backend logs. Error: ' + error.message });
+    }
   }
 });
 

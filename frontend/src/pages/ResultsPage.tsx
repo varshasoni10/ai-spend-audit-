@@ -50,7 +50,7 @@ export default function ResultsPage() {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('http://localhost:3001/api/lead', {
+      const response = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, result, input })
@@ -60,7 +60,7 @@ export default function ResultsPage() {
       if (data.success) {
         setSubmitted(true);
       } else {
-        alert("Failed to send email. Ensure the backend is running and configured.");
+        alert(data.error || "Failed to send email. Ensure the backend is running and configured.");
       }
     } catch (err) {
       console.error(err);
