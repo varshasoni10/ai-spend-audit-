@@ -29,4 +29,4 @@ npm run dev
 5. **Express for API/AI calls**: Hides the OpenAI/Anthropic API key securely rather than making direct calls from the Vite frontend.
 
 ## Deployed URL
-[Link to Vercel/Render Deployment] (Insert here)
+[https://frontend-five-green-32.vercel.app] (Insert here)
